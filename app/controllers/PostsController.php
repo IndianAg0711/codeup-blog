@@ -19,7 +19,7 @@ class PostsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return 'form';
+		return View::make('posts/create');;
 	}
 
 	/**
@@ -29,7 +29,7 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		return 'store';
+		return Redirect::back()->withInput();
 	}
 
 	/**
