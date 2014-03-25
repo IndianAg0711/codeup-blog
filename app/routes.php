@@ -16,12 +16,22 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('/resume', function()
+Route::get('/resume', 'HomeController@showResume');
+
+Route::get('/portfolio', 'HomeController@showPortfolio');
+
+Route::get('/sayhello/{name}', function($name)
 {
-    return "This is my resume";
+	return View::make('my-first-view')->with('name', $name);
 });
 
-Route::get('/portfolio', function()
+Route::get('rolldice/{guess?}', function($guess = null)
 {
-    return "This is my portfolio";
+	$die = rand(1,6);
+	$data = [
+			'die' => $die,
+			'guess' => $guess
+			];
+
+	return View::make('dice')->with($data);
 });
