@@ -12,9 +12,7 @@
 	 	</div>
 	 	<div class="form-group">
 	    	<label for="body">Post:</label>
-	    	<textarea rows="8" class="form-control" id="body" name="body">
-	    		{{{ Input::old('body') }}}
-	    	</textarea>
+	    	<textarea rows="8" class="form-control" id="body" name="body">{{{ Input::old('body') }}}</textarea>
 	 	</div>
 	 	<button type="submit" class="btn btn-default">Submit</button>
 	</form>

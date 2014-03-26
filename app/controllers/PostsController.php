@@ -29,6 +29,7 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
+		log::info(Input::all());
 		return Redirect::back()->withInput();
 	}
 
