@@ -34,3 +34,8 @@ Route::get('rolldice/{guess?}', function($guess = null)
 
 	return View::make('dice')->with($data);
 });
+
+Route::get('orm-test', function () {
+	$posts = Post::all();
+	return $posts;
+});

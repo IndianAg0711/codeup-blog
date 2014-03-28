@@ -91,6 +91,13 @@
       </div><!-- /.container-fluid -->
     </nav>
 
+    @if (Session::has('successMessage'))
+        <div class="alert alert-success">{{{ Session::get('successMessage') }}}</div>
+    @endif
+    @if (Session::has('errorMessage'))
+        <div class="alert alert-danger">{{{ Session::get('errorMessage') }}}</div>
+    @endif
+
 
     @yield('content')
 
@@ -99,5 +106,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    @yield('bottom-script')
 </body>
 </html>

@@ -6,7 +6,7 @@
 <br>
 <br>
 	<div>
-		{{ Form::open(array('action' => 'PostsController@store', 'method' => 'POST')) }}
+		{{ Form::model($post, array('action' => array('PostsController@update', $post->id), 'method' => 'PUT')) }}
 		
 		<div class="form-group">
 			{{ Form::label('title', 'Title') }}
@@ -18,7 +18,7 @@
 			{{ Form::textarea('body') }}
 			{{ $errors->has('body') ? $errors->first('body', "<p><span class='help-block'>:message</span></p>") : ''}}
 		</div>
-		<button type="submit">POST</button>
+		<button type="submit">Update Post</button>
 		{{ Form::close() }}
 	</div>
 </div>
