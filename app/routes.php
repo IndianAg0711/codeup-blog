@@ -19,23 +19,8 @@ Route::get('/portfolio', 'HomeController@showPortfolio');
 
 Route::resource('posts', 'PostsController');
 
-Route::get('/sayhello/{name}', function($name)
-{
-	return View::make('my-first-view')->with('name', $name);
-});
+Route::get('/login', 'HomeController@showLogin');
 
-Route::get('rolldice/{guess?}', function($guess = null)
-{
-	$die = rand(1,6);
-	$data = [
-			'die' => $die,
-			'guess' => $guess
-			];
+Route::post('/login', 'HomeController@doLogin');
 
-	return View::make('dice')->with($data);
-});
-
-Route::get('orm-test', function () {
-	$posts = Post::all();
-	return $posts;
-});
+Route::get('/logout', 'HomeController@logout');

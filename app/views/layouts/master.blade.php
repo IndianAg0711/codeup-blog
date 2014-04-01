@@ -74,6 +74,11 @@
           <ul class="nav navbar-nav">
             <li><a href="{{{ action('HomeController@showResume') }}}">Resume</a></li>
             <li><a href="{{{ action('HomeController@showPortfolio') }}}">Portfolio</a></li>
+            @if (Auth::check())
+            <li><a href="{{{ action('HomeController@logout') }}}">Logout</a></li>
+            @else
+            <li><a href="{{{ action('HomeController@showLogin') }}}">Login</a></li>
+            @endif
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
               <ul class="dropdown-menu">

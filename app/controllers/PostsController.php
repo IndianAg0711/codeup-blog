@@ -7,7 +7,7 @@ class PostsController extends \BaseController {
 	{
 		parent::__construct();
 
-		$this->beforeFilter('auth.basic', ['except' => ['index', 'show']]);
+		$this->beforeFilter('auth', ['except' => ['index', 'show']]);
 	}
 
 	/**
@@ -17,7 +17,17 @@ class PostsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$posts = Post::paginate(4);
+		$search = Input::get('search');
+		$query = Post::with('user');
+
+		if ($search != null) {
+			$query->where('title', 'LIKE', "%$search%")
+				->orWhere('body', 'LIKE', "%$search%")
+				->orderBy('created_at', 'desc')
+				->paginate(4);
+		}	else {			
+			$posts = $query->orderBy('created_at', 'desc')->paginate(4);
+		}
 		return View::make('posts.index')->with('posts', $posts);
 	}
 
@@ -48,6 +58,7 @@ class PostsController extends \BaseController {
 		else
 		{
 			$post = New Post;
+			$post->user_id = Auth::user()->id;
 			$post->title = Input::get('title');
 			$post->body = Input::get('body');
 			$post->save();
