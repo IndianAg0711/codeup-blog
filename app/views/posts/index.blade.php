@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+<title>Blog Index</title>
+@stop
+
 @section('content')
 <div class="container-fluid">
 <h1>Posts</h1>
