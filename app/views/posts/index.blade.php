@@ -1,32 +1,35 @@
 @extends('layouts.master')
 
+@section('style')
+<style type="text/css">
+
+</style>
+@stop
+
 @section('title')
 <title>Blog Index</title>
 @stop
 
 @section('content')
-<div class="container-fluid">
-<h1>Posts</h1>
+<div class="container-fluid page">
+<h1>Blog About It</h1>
 <br>
-<p><a href=" {{{ action('PostsController@create') }}}">Create New Post</a></p>
 <br>
 @foreach ($posts as $post)
-    <p><a href=" {{{ action('PostsController@show', $post->id) }}}">{{{ $post->title }}}</a> {{{ $post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i A') }}}</p>
-
-    <p>{{{ $post->user->email }}}</p>
+    <p><span id="post-title"><a href=" {{{ action('PostsController@show', $post->id) }}}">{{{ $post->title }}}</a></span></p>
+    <p> {{{ $post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i A') }}}</p>
+    <p>Author: {{{ $post->user->email }}}</p>
+    <br>
 @endforeach
 <br>
 {{ $posts->appends(array('search' => Input::get('search')))->links() }}
 
 	<div>
-		{{ Form::open(array('action' => 'PostsController@index', 'method' => 'Get')) }}
-		
-		<div class="form-group">
-			{{ Form::label('search', 'Search') }}
-			{{ Form::text('search') }}
-		</div>
+		<a href=" {{{ action('PostsController@create') }}}" class="btn btn-success">Create New Post</a>
+		<span class="pull-right">{{ Form::open(array('action' => 'PostsController@index', 'method' => 'Get')) }}
+		{{ Form::text('search') }}
 		<button type="submit">Search</button>
-		{{ Form::close() }}
+		{{ Form::close() }}</span>
 	</div>
 </div>
 

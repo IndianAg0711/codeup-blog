@@ -21,7 +21,7 @@ class PostsController extends \BaseController {
 		$query = Post::with('user');
 
 		if ($search != null) {
-			$query->where('title', 'LIKE', "%$search%")
+			$posts = $query->where('title', 'LIKE', "%$search%")
 				->orWhere('body', 'LIKE', "%$search%")
 				->orderBy('created_at', 'desc')
 				->paginate(4);
@@ -61,6 +61,11 @@ class PostsController extends \BaseController {
 			$post->user_id = Auth::user()->id;
 			$post->title = Input::get('title');
 			$post->body = Input::get('body');
+
+			if (Input::hasFile('file_upload'))
+				{
+					$post->assignImage(Input::file('file_upload'));
+				}
 			$post->save();
 			Session::flash('successMessage', 'Post created successfully!');
 			return Redirect::action('PostsController@index');
@@ -125,7 +130,7 @@ class PostsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$post = Post::find($id)->delete();
+		Post::find($id)->delete();
 		return Redirect::action('PostsController@index');
 	}
 

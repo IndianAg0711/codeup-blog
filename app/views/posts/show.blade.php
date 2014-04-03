@@ -1,16 +1,20 @@
-@extends('layouts.master')
+@extends ('layouts.master')
 
 @section('content')
-<div class="container-fluid">
-<h1>Posts</h1>
+<div class="container-fluid page">
+<h1>{{{ $post->title }}}</h1>
 <br>
 <br>
-    <p>{{{ $post->title }}}</p>
     <p>{{{ $post->body }}}</p>
+    @if ($post->img_path != null)
+    <img src="{{{ $post->img_path }}}">
+    @endif
 <br>
 <br>
-<p><a href=" {{{ action('PostsController@edit', $post->id) }}}">Edit Post</a></p>
-<p><a href="#" class="btn btn-danger" id="btnDeletePost">Delete Post</a></p>
+<p>
+	<a href=" {{{ action('PostsController@edit', $post->id) }}}" class="btn btn-info">Edit Post</a>
+	<a href="#" class="btn btn-danger" id="btnDeletePost">Delete Post</a>
+</p>
 
 {{ Form::open(array('action' => array('PostsController@destroy', $post->id), 'method' => 'DELETE', 'id' => 'formDeletePost')) }}
 {{ Form::close() }}

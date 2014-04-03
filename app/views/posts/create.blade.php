@@ -1,12 +1,12 @@
-@extends('layouts.master')
+@extends ('layouts.master')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid page">
 <h1>Create New Post:</h1>
 <br>
 <br>
 	<div>
-		{{ Form::open(array('action' => 'PostsController@store', 'method' => 'POST')) }}
+		{{ Form::open(array('action' => 'PostsController@store', 'method' => 'POST', 'files' => true)) }}
 		
 		<div class="form-group">
 			{{ Form::label('title', 'Title') }}
@@ -18,6 +18,11 @@
 			{{ Form::textarea('body') }}
 			{{ $errors->has('body') ? $errors->first('body', "<p><span class='help-block'>:message</span></p>") : ''}}
 		</div>
+		<div>
+			{{ Form::label('file_upload', 'Upload a Pic?') }}
+			{{ Form::file('file_upload') }}
+		</div>
+		<br>
 		<button type="submit">POST</button>
 		{{ Form::close() }}
 	</div>

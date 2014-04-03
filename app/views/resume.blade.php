@@ -1,7 +1,11 @@
 @extends ('layouts.master')
 
+@section('style')
+
+@stop
+
 @section('content')
-	<div class="container-fluid">
+	<div class="container-fluid page">
 	  <div class="row">
 	    <div class="col-md-12"><h1>Joseph Villafranca <small>LAMP+J Stack Developer</small></h1></div>
 	  </div>

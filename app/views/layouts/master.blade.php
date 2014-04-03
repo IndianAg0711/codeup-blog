@@ -3,115 +3,95 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     @yield('title')
 
     <!-- Bootstrap -->
-   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox-v=2.1.5.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">  
+    
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,300,200&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    
+    
+    <link rel="prefetch" href="/images/zoom.png">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    @yield('style')
 
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="/public/font-awesome/css/font-awesome.min.css">
-
-
-    <!-- Overridden CSS -->
-    <style type="text/css">
-
-    .navbar {
-      background-color: #69F;
-      color: #000;
-    }
-
-    .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
-      background-color: #000;
-      color: #69F;
-    }
-
-    .navbar-default .navbar-nav>.active>a:hover {
-      background-color: transparent;
-      color: #000;
-    }
-
-    .navbar-default .navbar-nav>li>a:hover {
-      background-color: #000;
-      color: #69F;
-    }
-
-    .navbar-default .navbar-brand {
-      color: #000;
-    }
-
-    .navbar-default .navbar-nav>li>a {
-      color: #000;
-    }
-
-    </style>
-</head>
+  </head>
   <body>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Blog</a>
-        </div>
+  <div class="navbar navbar-fixed-top" data-activeslide="1">
+    <div class="container">
+    
+      <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      
+      <div class="nav-collapse collapse navbar-responsive-collapse">
+        <ul class="nav row">
+          <li class="col-12 col-sm-2"><a href="{{{ action('HomeController@showWelcome') }}}"><span class="icon icon-home"></span> <span class="text">HOME</span></a></li>
+          <li class="col-12 col-sm-2"><a href="{{{ action('HomeController@showResume') }}}"><span class="icon icon-user"></span> <span class="text">RESUME</span></a></li>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="{{{ action('HomeController@showResume') }}}">Resume</a></li>
-            <li><a href="{{{ action('HomeController@showPortfolio') }}}">Portfolio</a></li>
-            @if (Auth::check())
-            <li><a href="{{{ action('HomeController@logout') }}}">Logout</a></li>
-            @else
-            <li><a href="{{{ action('HomeController@showLogin') }}}">Login</a></li>
-            @endif
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+          <li class="col-12 col-sm-2"><a href="{{{ action('HomeController@showPortfolio') }}}"><span class="icon icon-briefcase"></span> <span class="text">PORTFOLIO</span></a></li>
+          <li class="col-12 col-sm-2"><a href="{{{ action('PostsController@index') }}}"><span class="icon icon-gears"></span> <span class="text">BLOG</span></a></li>
+          @if (Auth::check())
+          <li class="col-12 col-sm-2"><a href="{{{ action('HomeController@logout') }}}"><span class="icon icon-heart"></span> <span class="text">LOGOUT</span></a></li>
+          @else
+          <li class="col-12 col-sm-2"><a href="{{{ action('HomeController@showLogin') }}}"><span class="icon icon-envelope"></span> <span class="text">LOGIN</span></a></li>
+          @endif        
+        </ul>
+      </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+  </div><!-- /.navbar -->
 
     @if (Session::has('successMessage'))
-        <div class="alert alert-success">{{{ Session::get('successMessage') }}}</div>
+        <div class="alert alert-success message">{{{ Session::get('successMessage') }}}</div>
     @endif
     @if (Session::has('errorMessage'))
-        <div class="alert alert-danger">{{{ Session::get('errorMessage') }}}</div>
+        <div class="alert alert-danger message">{{{ Session::get('errorMessage') }}}</div>
     @endif
 
 
     @yield('content')
 
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-
-    @yield('bottom-script')
 </body>
+
+  <!-- SCRIPTS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <!-- SCRIPTS -->
+  <script src="/js/html5shiv.js"></script>
+  <script src="/js/jquery-migrate-1.2.1.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/jquery.easing.1.3.js"></script>
+  <script type="text/javascript" src="/fancybox/jquery.fancybox.pack-v=2.1.5.js"></script>
+  <script src="/js/script.js"></script>
+
+  @yield('bottom-script')
+  
+  <!-- fancybox init -->
+  <script>
+  $(document).ready(function(e) {
+    var lis = $('.nav > li');
+    menu_focus( lis[0], 1 );
+    
+    $(".fancybox").fancybox({
+      padding: 10,
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  
+  });
+  </script>
 </html>

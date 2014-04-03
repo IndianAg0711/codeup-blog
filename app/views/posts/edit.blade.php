@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container-fluid">
-<h1>Create New Post:</h1>
+<div class="container-fluid page">
+<h1>Edit Post:</h1>
 <br>
 <br>
 	<div>
