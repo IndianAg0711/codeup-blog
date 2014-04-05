@@ -5,7 +5,7 @@
 <h1>{{{ $post->title }}}</h1>
 <br>
 <br>
-    <p>{{{ $post->body }}}</p>
+    <div>{{ $post->body }}</div>
     @if ($post->img_path != null)
     <img src="{{{ $post->img_path }}}">
     @endif

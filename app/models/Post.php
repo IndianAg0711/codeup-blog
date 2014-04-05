@@ -18,6 +18,15 @@ class Post extends BaseModel {
 	    $this->img_path = '/uploaded_files/' . $filename;   	
     }
 
+    public function renderBody($body) {
+    	$parsedown = new Parsedown();
+		$parsed = $parsedown->parse($body);
+		$config = HTMLPurifier_Config::createDefault();
+		$purifier = new HTMLPurifier($config);
+		$cleanHTML = $purifier->purify($parsed);
+		return $cleanHTML;
+    }
+
     public static $rules = array(
 	    'title'      => 'required|max:100',
 	    'body'       => 'required|max:10000'

@@ -48,6 +48,7 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
+		// Validate requirements of post before storing
 		$validator = Validator::make(Input::all(), Post::$rules);
 
 		if($validator->fails())
@@ -60,8 +61,9 @@ class PostsController extends \BaseController {
 			$post = New Post;
 			$post->user_id = Auth::user()->id;
 			$post->title = Input::get('title');
-			$post->body = Input::get('body');
+			$post->body = $post->renderBody(Input::get('body'));
 
+			// Check to see if img was uploaded
 			if (Input::hasFile('file_upload'))
 				{
 					$post->assignImage(Input::file('file_upload'));
@@ -115,7 +117,7 @@ class PostsController extends \BaseController {
 		else
 		{
 			$post->title = Input::get('title');
-			$post->body = Input::get('body');
+			$post->body = $post->renderBody(Input::get('body'));
 			$post->save();
 			Session::flash('successMessage', 'Post Updated Successfully!');
 			return Redirect::action('PostsController@index');
