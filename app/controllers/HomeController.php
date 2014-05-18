@@ -45,7 +45,7 @@ class HomeController extends BaseController {
 		else
 		{
 			// login failed, go back to the login view
-			return Redirect::back()->withInput('email');
+			return Redirect::back()->withInput(Input::old('email'));
 		}
 	}
 
